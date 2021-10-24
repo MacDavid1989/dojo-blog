@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>This is the homepage</h1>
+    <p>My name is {{ name }} and my age is {{ age }}</p>
   </div>
 </template>
 
@@ -8,13 +9,13 @@
 export default {
   name: "Home",
   setup() {
-    console.log("setup");
-  },
-  created() {
-    console.log("created");
-  },
-  mounted() {
-    console.log("method");
+    let name = "mario";
+    let age = 30;
+
+    return {
+      name,
+      age,
+    };
   },
 };
 </script>
