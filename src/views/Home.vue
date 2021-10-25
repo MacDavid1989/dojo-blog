@@ -15,24 +15,20 @@ export default {
   name: "Home",
   components: { PostList },
   setup() {
-    const posts = ref([
-      {
-        title: "welcome to the blog",
-        body:
-          "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum architecto voluptatem sed laboriosam, ut aliquid quos sint natus, facilis exercitationem asperiores placeat cumque atque laborum numquam nulla, consectetur illum officia hic quas error repudiandae obcaecati! Facilis repellat perferendis fugiat magnam consequatur! Earum odio est itaque quidem distinctio illo architecto libero repellat eaque? Magnam facilis, obcaecati temporibus itaque quas placeat maiores dolore fugiat provident quae, sunt quia atque nisi perspiciatis quaerat ducimus. Repudiandae quia ut dolorem sapiente voluptates fugit excepturi, tempora delectus a, quisquam mollitia quasi unde temporibus quos minima recusandae exercitationem minus praesentium fugiat! Optio praesentium totam sed commodi omnis.",
-        id: 1,
-      },
-      {
-        title: "top 5 css tips",
-        body:
-          "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum architecto voluptatem sed laboriosam, ut aliquid quos sint natus, facilis exercitationem asperiores placeat cumque atque laborum numquam nulla, consectetur illum officia hic quas error repudiandae obcaecati! Facilis repellat perferendis fugiat magnam consequatur! Earum odio est itaque quidem distinctio illo architecto libero repellat eaque? Magnam facilis, obcaecati temporibus itaque quas placeat maiores dolore fugiat provident quae, sunt quia atque nisi perspiciatis quaerat ducimus. Repudiandae quia ut dolorem sapiente voluptates fugit excepturi, tempora delectus a, quisquam mollitia quasi unde temporibus quos minima recusandae exercitationem minus praesentium fugiat! Optio praesentium totam sed commodi omnis.",
-        id: 2,
-      },
-    ]);
+    const posts = ref([]);
+    const error = ref(null);
 
-    
+    const load = async () => {
+      try {
+        let data = await fetch("http://localhost:3000/posts");
 
-    return { posts };
+        console.log(data);
+      } catch (error) {}
+    };
+
+    load();
+
+    return { posts, error };
   },
 };
 </script>
