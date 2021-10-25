@@ -11,23 +11,17 @@ import { ref } from "@vue/reactivity";
 export default {
   name: "Home",
   setup() {
-    const p = ref(null);
-    console.log(p, p.value)
-
-    let name = "mario";
-    let age = 30;
+    const name = ref("mario");
+    const age = ref(30);
 
     const handleClick = () => {
-      console.log(p, p.value);
-      p.value.classList.add("test");
-      p.value.textContent = 'Hello Ninjas'
+      name.value = "luigi";
     };
 
     return {
       name,
       age,
       handleClick,
-      p,
     };
   },
 };
