@@ -1,7 +1,8 @@
 <template>
   <div>
     <h1>This is the homepage</h1>
-    <p>{{ name }}</p>
+    <input type="text" v-model="search" />
+    <div v-for="(name, index) in names" :key="index">{{ name }}</div>
   </div>
 </template>
 
@@ -10,10 +11,19 @@ import { computed, ref } from "@vue/reactivity";
 export default {
   name: "Home",
   setup() {
-    const name = computed(() => {
-      return "shaun";
-    });
-    return { name };
+    const search = ref("");
+    const names = ref([
+      "mario",
+      "luigi",
+      "peach",
+      "toad",
+      "yoshi",
+      "bowser",
+      "koopa",
+    ]);
+
+    
+    return { names, search };
   },
 };
 </script>
