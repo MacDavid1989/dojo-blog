@@ -12,6 +12,7 @@ export default {
   name: "Home",
   setup() {
     const p = ref(null);
+    console.log(p, p.value)
 
     let name = "mario";
     let age = 30;
