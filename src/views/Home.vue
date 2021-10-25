@@ -1,14 +1,18 @@
 <template>
   <div>
     <h1>This is the homepage</h1>
-    <PostList :posts="posts" />
+    <PostList v-if="showPosts" :posts="posts" />
+    <button @click="togglePosts">Toggle Posts</button>
+    <button @click="deletePost">Delete a Post</button>
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref } from "@vue/reactivity";
+
 // components
 import { PostList } from "../components";
+
 export default {
   name: "Home",
   components: { PostList },
@@ -27,7 +31,18 @@ export default {
         id: 2,
       },
     ]);
-    return { posts };
+
+    const showPosts = ref(true);
+
+    const togglePosts = () => {
+      showPosts.value = !showPosts.value;
+    };
+
+    const deletePost = () => {
+      posts.value.pop();
+    };
+
+    return { posts, showPosts, togglePosts, deletePost };
   },
 };
 </script>
