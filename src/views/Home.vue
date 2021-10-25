@@ -1,50 +1,31 @@
 <template>
   <div>
     <h1>This is the homepage</h1>
-    <input type="text" v-model="search" />
-    <p>Search term - {{ search }}</p>
-    <div v-for="(name, index) in matchingNames" :key="index">{{ name }}</div>
-    <button @click="handleClick">Stop Watching</button>
+    <PostList :posts="posts" />
   </div>
 </template>
 
 <script>
-import { computed, ref } from "@vue/reactivity";
-import { watch, watchEffect } from "@vue/runtime-core";
+import { ref } from "vue";
+// components
+import { PostList } from "../components";
 export default {
   name: "Home",
+  components: { PostList },
   setup() {
-    const search = ref("");
-    const names = ref([
-      "mario",
-      "luigi",
-      "peach",
-      "toad",
-      "yoshi",
-      "bowser",
-      "koopa",
+    const posts = ref([
+      {
+        title: "welcome to the blog",
+        body: "Lorem ipsum",
+        id: 1,
+      },
+      {
+        title: "top 5 css tips",
+        body: "Lorem ipsum",
+        id: 2,
+      },
     ]);
-
-    // only runs when the ref passed as an argument changes
-    const stopWatch = watch(search, () => {
-      console.log("watch function");
-    });
-
-    // runs once setup runs and then everytime a ref used within the function changes
-    const stopEffect = watchEffect(() => {
-      console.log("watch effect function", search.value);
-    });
-
-    const matchingNames = computed(() => {
-      return names.value.filter((name) => name.includes(search.value));
-    });
-
-    const handleClick = () => {
-      stopWatch();
-      stopEffect();
-    };
-
-    return { names, search, matchingNames, handleClick };
+    return { posts };
   },
 };
 </script>
