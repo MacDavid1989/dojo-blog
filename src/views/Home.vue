@@ -2,7 +2,8 @@
   <div>
     <h1>This is the homepage</h1>
     <input type="text" v-model="search" />
-    <div v-for="(name, index) in names" :key="index">{{ name }}</div>
+    <p>Search term - {{ search }}</p>
+    <div v-for="(name, index) in matchingNames" :key="index">{{ name }}</div>
   </div>
 </template>
 
@@ -22,8 +23,11 @@ export default {
       "koopa",
     ]);
 
-    
-    return { names, search };
+    const matchingNames = computed(() => {
+      return names.value.filter((name) => name.includes(search.value));
+    });
+
+    return { names, search, matchingNames };
   },
 };
 </script>
