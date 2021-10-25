@@ -26,10 +26,10 @@ export default {
           throw Error("No data available");
         }
 
-        console.log(data);
+        posts.value = await data.json();
       } catch (error) {
         error.value = error.message;
-        console.log(error.value);
+        console.log(error);
       }
     };
 
