@@ -2,25 +2,35 @@
   <div>
     <h1>This is the homepage</h1>
     <h2>Refs</h2>
-    <p ref="p">{{ ninjaOne.name }}- {{ ninjaOne.age }}</p>
+    <p ref="p">{{ ninjaOne.name }} - {{ ninjaOne.age }}</p>
     <button @click="updateNinjaOne">Update Ninja One</button>
+    <h2>Reactive</h2>
+    <p ref="p">{{ ninjaTwo.name }} - {{ ninjaTwo.age }}</p>
+    <button @click="updateNinjaTwo">Update Ninja One</button>
   </div>
 </template>
 
 <script>
-import { ref } from "@vue/reactivity";
+import { reactive, ref } from "@vue/reactivity";
 export default {
   name: "Home",
   setup() {
     const ninjaOne = ref({ name: "mario", age: 30 });
+    const ninjaTwo = reactive({ name: "luigi", age: 35 });
 
     const updateNinjaOne = () => {
       ninjaOne.value.age = 40;
     };
 
+    const updateNinjaTwo = () => {
+      ninjaTwo.age = 45;
+    };
+
     return {
       ninjaOne,
       updateNinjaOne,
+      ninjaTwo,
+      updateNinjaTwo,
     };
   },
 };
