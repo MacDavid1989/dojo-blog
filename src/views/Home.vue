@@ -4,6 +4,7 @@
     <input type="text" v-model="search" />
     <p>Search term - {{ search }}</p>
     <div v-for="(name, index) in matchingNames" :key="index">{{ name }}</div>
+    <button @click="handleClick">Stop Watching</button>
   </div>
 </template>
 
@@ -24,11 +25,13 @@ export default {
       "koopa",
     ]);
 
-    watch(search, () => {
+    // only runs when the ref passed as an argument changes
+    const stopWatch = watch(search, () => {
       console.log("watch function");
     });
 
-    watchEffect(() => {
+    // runs once setup runs and then everytime a ref used within the function changes
+    const stopEffect = watchEffect(() => {
       console.log("watch effect function", search.value);
     });
 
@@ -36,7 +39,12 @@ export default {
       return names.value.filter((name) => name.includes(search.value));
     });
 
-    return { names, search, matchingNames };
+    const handleClick = () => {
+      stopWatch();
+      stopEffect();
+    };
+
+    return { names, search, matchingNames, handleClick };
   },
 };
 </script>
