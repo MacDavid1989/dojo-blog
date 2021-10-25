@@ -9,6 +9,7 @@
 
 <script>
 import { computed, ref } from "@vue/reactivity";
+import { watch } from "@vue/runtime-core";
 export default {
   name: "Home",
   setup() {
@@ -22,6 +23,10 @@ export default {
       "bowser",
       "koopa",
     ]);
+
+    watch(search, () => {
+      console.log("watching function");
+    });
 
     const matchingNames = computed(() => {
       return names.value.filter((name) => name.includes(search.value));
