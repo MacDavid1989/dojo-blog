@@ -9,7 +9,7 @@
 
 <script>
 import { computed, ref } from "@vue/reactivity";
-import { watch } from "@vue/runtime-core";
+import { watch, watchEffect } from "@vue/runtime-core";
 export default {
   name: "Home",
   setup() {
@@ -25,7 +25,11 @@ export default {
     ]);
 
     watch(search, () => {
-      console.log("watching function");
+      console.log("watch function");
+    });
+
+    watchEffect(() => {
+      console.log("watch effect function", search.value);
     });
 
     const matchingNames = computed(() => {
