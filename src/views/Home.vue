@@ -6,10 +6,10 @@
         {{ error }}
       </p>
     </div>
-    <div v-if="posts.length">
+    <div v-if="!posts.length && !error"><p>Loading...</p></div>
+    <div v-else>
       <PostList :posts="posts" />
     </div>
-    <div v-else-if="!error"><p>Loading...</p></div>
   </div>
 </template>
 
@@ -18,6 +18,7 @@ import { ref } from "@vue/reactivity";
 
 // components
 import { PostList } from "../components";
+import { onMounted } from "@vue/runtime-core";
 
 export default {
   name: "Home",
@@ -26,7 +27,7 @@ export default {
     const posts = ref([]);
     const error = ref(null);
 
-    const load = async () => {
+    onMounted(async () => {
       try {
         let data = await fetch("http://localhost:3000/posts");
 
@@ -39,9 +40,7 @@ export default {
         error.value = err.message;
         console.error(err);
       }
-    };
-
-    load();
+    });
 
     return { posts, error };
   },
