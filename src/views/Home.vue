@@ -14,33 +14,19 @@
 </template>
 
 <script>
-import { ref } from "@vue/reactivity";
-
 // components
 import { PostList } from "../components";
-import { onMounted } from "@vue/runtime-core";
+
+// composibles
+import { getPosts } from "../composibles";
 
 export default {
   name: "Home",
   components: { PostList },
   setup() {
-    const posts = ref([]);
-    const error = ref(null);
+    const { posts, error, load } = getPosts();
 
-    onMounted(async () => {
-      try {
-        let data = await fetch("http://localhost:3000/posts");
-
-        if (!data.ok) {
-          throw Error("No data available");
-        }
-
-        posts.value = await data.json();
-      } catch (err) {
-        error.value = err.message;
-        console.error(err);
-      }
-    });
+    load();
 
     return { posts, error };
   },
