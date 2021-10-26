@@ -1,6 +1,11 @@
 <template>
   <div>
     <h1>This is the homepage</h1>
+    <div v-if="error">
+      <p>
+        {{ error }}
+      </p>
+    </div>
     <PostList :posts="posts" />
   </div>
 </template>
@@ -27,9 +32,9 @@ export default {
         }
 
         posts.value = await data.json();
-      } catch (error) {
-        error.value = error.message;
-        console.log(error);
+      } catch (err) {
+        error.value = err.message;
+        console.log(error.value);
       }
     };
 
