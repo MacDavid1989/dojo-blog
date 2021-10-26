@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { Home, About, Details, NotFound } from "../views";
+import { Home, Details, NotFound } from "../views";
 
 const routes = [
   {
@@ -8,14 +8,10 @@ const routes = [
     component: Home,
   },
   {
-    path: "/about",
-    name: "About",
-    component: About,
-  },
-  {
-    path: "/details",
+    path: "/posts/:id",
     name: "Details",
     component: Details,
+    props: true,
   },
   // redirect
   {
