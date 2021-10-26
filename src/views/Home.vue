@@ -6,7 +6,10 @@
         {{ error }}
       </p>
     </div>
-    <PostList :posts="posts" />
+    <div v-if="posts.length">
+      <PostList :posts="posts" />
+    </div>
+    <div v-else-if="!error"><p>Loading...</p></div>
   </div>
 </template>
 
@@ -34,7 +37,7 @@ export default {
         posts.value = await data.json();
       } catch (err) {
         error.value = err.message;
-        console.log(error.value);
+        console.error(err);
       }
     };
 
