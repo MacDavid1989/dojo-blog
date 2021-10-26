@@ -1,7 +1,7 @@
 import { ref } from "@vue/reactivity";
 
 const getPost = (id) => {
-  const post = ref({});
+  const post = ref(null);
   const error = ref(null);
 
   const load = async () => {
@@ -9,7 +9,7 @@ const getPost = (id) => {
       let data = await fetch(`http://localhost:3000/posts/${id}`);
 
       if (!data.ok) {
-        throw Error("No data available");
+        throw Error(`Post with id ${id} does not exist`);
       }
 
       post.value = await data.json();

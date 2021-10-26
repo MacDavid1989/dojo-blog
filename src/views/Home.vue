@@ -7,7 +7,7 @@
       </p>
     </div>
     <div v-if="!posts.length && !error"><p>Loading...</p></div>
-    <div v-else>
+    <div v-else-if="posts.length">
       <PostList :posts="posts" />
     </div>
   </div>
